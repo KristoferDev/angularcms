@@ -8,10 +8,18 @@ import { PageService } from './../../services/page.service';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
-
   pages: any;
+  user: string;
 
-  constructor(public pageService: PageService) { }
+  get userLoggedIn() {
+    if (localStorage.getItem('user')) {
+      this.user = localStorage.getItem('user').replace(/\"/g, '');
+      return true;
+    }
+    return false;
+  }
+
+  constructor(public pageService: PageService) {}
 
   ngOnInit() {
     this.pageService.getPages().subscribe((pages: any) => {

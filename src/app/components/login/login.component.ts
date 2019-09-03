@@ -8,14 +8,10 @@ import { UserService } from './../../services/user.service';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
+  public loginFailed = false;
+  public userRegistered = false;
 
-public loginFailed = false;
-public userRegistered = false;
-
-  constructor(
-    private router: Router,
-    private userService: UserService
-  ) { }
+  constructor(private router: Router, private userService: UserService) {}
 
   ngOnInit() {
     if (localStorage.getItem('user')) this.router.navigateByUrl('');
@@ -26,23 +22,24 @@ public userRegistered = false;
     }
   }
 
-  login({value, valid}) {
+  login({ value, valid }) {
     if (valid) {
       this.userService.login(value).subscribe(res => {
         if (res == 'invalidLogin') {
           this.loginFailed = true;
-          setTimeout(function() {
-            this.loginFailed = false;
-          }.bind(this), 2000);
+          setTimeout(
+            function() {
+              this.loginFailed = false;
+            }.bind(this),
+            2000
+          );
         } else {
           localStorage.setItem('user', JSON.stringify(res));
-          if (localStorage.getItem('user') === '\"admin\"') {
-            /*this.router.navigateByUrl('admin/pages');*/
-            console.log('Loggin in now');
-        } else {
-          console.log('This is else');
-          this.router.navigateByUrl('');
-        }
+          if (localStorage.getItem('user') === '"admin"') {
+            this.router.navigateByUrl('admin/pages');
+          } else {
+            this.router.navigateByUrl('');
+          }
         }
       });
     } else {
