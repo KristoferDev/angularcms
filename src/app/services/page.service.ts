@@ -26,6 +26,7 @@ export class PageService {
       catchError(error => throwError(error.message || error))
     );
   }
+
   postAddPage(value) {
     return this.http.post('http://localhost:3000/pages/add-page', value).pipe(
       map(res => res || []),
