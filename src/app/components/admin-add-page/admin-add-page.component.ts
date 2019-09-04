@@ -25,7 +25,7 @@ export class AdminAddPageComponent implements OnInit {
       CKEDITOR.replace('content');
     }
   }
-
+  // Addpage function here
   addPage({ form, value, valid }) {
     form.reset();
     if (valid) {
