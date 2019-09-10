@@ -23,7 +23,7 @@
       <a routerLink="/admin/edit-page/{{ page._id }}">Edit</a>
     </td>
     <td *ngIf="page.slug != 'home'">
-      <a routerLink="/admin/delete-page/{{ page._id }}">Delete</a>
+      <a (click)="deletePage(page._id)" routerLink="/admin/pages">Delete</a>
     </td>
   </tr>
 </table>

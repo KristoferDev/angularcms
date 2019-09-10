@@ -49,4 +49,10 @@ export class PageService {
         catchError(error => throwError(error.message || error))
       );
   }
+  getDeletePage(id) {
+    return this.http.get('http://localhost:3000/pages/delete-page/' + id).pipe(
+      map(res => res || []),
+      catchError(error => throwError(error.message || error))
+    );
+  }
 }
